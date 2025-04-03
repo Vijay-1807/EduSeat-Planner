@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduSeater</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="https://www.vvitguntur.com/" target="_blank" class="logo-link">
+        <img src="https://res.cloudinary.com/dy9xcggyt/image/upload/v1736696738/tonfmmzzjhza7xa45s2b.jpg" 
+             alt="VVIT Logo" class="logo">
+      </a>
+    </div>
+    <div class="nav-right">
+      <!-- Profile Dashboard -->
+      <div class="profile-dashboard">
+        <button id="profile-btn" class="nav-btn">
+          <i class="fas fa-user-circle"></i>
+          <span>Profile</span>
+        </button>
+        <div id="profile-dropdown" class="dropdown-menu">
+          <div class="dropdown-header">
+            <i class="fas fa-user-circle"></i>
+            <h3>Student Profile</h3>
+          </div>
+          <div class="dropdown-content">
+            <p id="profile-roll"><i class="fas fa-id-card"></i> Roll No: </p>
+            <p id="session-time"><i class="fas fa-clock"></i> Session Time: </p>
+          </div>
+          <button id="logout-btn" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </div>
+      </div>
+
+      <!-- Dark Mode Toggle -->
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+          </div>
+        </label>
+      </div>
+
+      <!-- Help Button -->
+      <div class="help-menu">
+        <button id="help-btn" class="nav-btn">
+          <i class="fas fa-question-circle"></i>
+          <span>Help</span>
+        </button>
+        <div id="email-container" class="dropdown-menu">
+          <div class="dropdown-header">
+            <i class="fas fa-envelope"></i>
+            <h3>Contact Us</h3>
+          </div>
+          <div class="dropdown-content">
+            <a href="mailto:bonthavijay1807@gmail.com" class="email-link">
+              <i class="fas fa-paper-plane"></i>
+              bonthavijay1807@gmail.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="form-container">
+      <button type="button" class="clear-form" onclick="clearForm()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="exam-title">
+        <i class="fas fa-graduation-cap"></i>
+        <span class="edu">Edu</span>Seater
+      </h2>
+
+      <form id="examForm">
+        <div class="form-group">
+          <label for="regNo">
+            <i class="fas fa-id-card"></i>
+            Roll Number:
+          </label>
+          <input type="text" id="regNo" name="regNo" placeholder="Enter Roll Number" required>
+          <small class="input-hint">Example: 22BQ1A5421</small>
+          <!-- Error message will be dynamically added here -->
+        </div>
+
+        <button type="button" onclick="assignSeat()" class="submit-btn">
+          <i class="fas fa-search"></i>
+          Find My Seat
+        </button>
+
+        <div class="seat-result" id="seat-result">
+          <div class="result-card">
+            <h3><i class="fas fa-chair"></i> Your Seat Details</h3>
+            <div class="result-content">
+              <p id="block-info"><i class="fas fa-building"></i> Block: </p>
+              <p id="room-info"><i class="fas fa-door-open"></i> Room: </p>
+              <p id="seat-info"><i class="fas fa-chair"></i> Seat: </p>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <i class="fas fa-copyright"></i> EduSeat Planner
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

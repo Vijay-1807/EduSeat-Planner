@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Seating Plan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+    <!-- Add Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <a href="https://www.vvitguntur.com/" target="_blank">
+                <img src="https://res.cloudinary.com/dy9xcggyt/image/upload/v1736696738/tonfmmzzjhza7xa45s2b.jpg" alt="VVIT Logo" class="nav-logo">
+            </a>
+            <h1 class="brand-title">
+                <span class="edu">Edu</span>Seater
+            </h1>
+        </div>
+        <div class="nav-links">
+            <a href="#generate" class="nav-link active">
+                <i class="fas fa-plus-circle"></i> Generate Plan
+            </a>
+            <a href="#view" class="nav-link">
+                <i class="fas fa-users"></i> View Students
+            </a>
+            <a href="#seating" class="nav-link">
+                <i class="fas fa-chair"></i> Seating Plan
+            </a>
+        </div>
+        <div class="nav-actions">
+            <div class="nav-buttons">
+                <button id="help-btn" class="nav-btn circle">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Help</span>
+                </button>
+                <button id="logout-btn" class="nav-btn logout rectangle">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <h1 class="main-title">
+            <i class="fas fa-graduation-cap"></i>
+            <span class="edu">Edu</span>Seater
+        </h1>
+
+        <div class="section-container" id="generate">
+            <h2><i class="fas fa-sitemap"></i> Generate Seating Plan</h2>
+            <div class="form-group">
+                <label for="block">
+                    <i class="fas fa-building"></i> Select Block:
+                </label>
+                <select id="block" class="enhanced-select">
+                    <option value="Main">Main Block</option>
+                    <option value="Siemens">Siemens Block</option>
+                    <option value="Block-A">Block-A</option>
+                    <option value="Block-B">Block-B</option>
+                    <option value="Block-C">Block-C</option>
+                    <option value="Block-D">Block-D</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="totalRooms">
+                    <i class="fas fa-door-open"></i> Number of Rooms:
+                </label>
+                <input type="number" id="totalRooms" min="1" required>
+                <small class="input-hint">Rooms will be auto-filled based on block selection</small>
+            </div>
+
+            <div class="button-container">
+                <button id="generateRooms" class="action-btn">
+                    <i class="fas fa-plus-circle"></i> Generate Rooms
+                </button>
+                <button id="previewRoomBtn" class="action-btn secondary">
+                    <i class="fas fa-eye"></i> Preview Room
+                </button>
+            </div>
+
+            <div id="roomsContainer" class="rooms-grid"></div>
+
+            <div class="button-group">
+                <button id="generateSummary" class="action-btn primary hidden">
+                    <i class="fas fa-magic"></i> Generate Seating Plan
+                </button>
+                <button id="loadSeatingBtn" class="action-btn secondary hidden">
+                    <i class="fas fa-sync"></i> Load Seating Plan
+                </button>
+                <button id="exportCSVBtn" class="action-btn success hidden">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+            </div>
+        </div>
+
+        <div class="section-container" id="view">
+            <h2><i class="fas fa-users"></i> View Students by Branch</h2>
+            <div class="select-wrapper">
+                <select id="branchSelect" class="enhanced-select">
+                    <option value="">Select a branch</option>
+                    <option value="CSE">CSE</option>
+                    <option value="AIDS">AID</option>
+                    <option value="AIML">AIML</option>
+                    <option value="INF">IT</option>
+                    <option value="CIC">CIC</option>
+                    <option value="CSO">CSO</option>
+                    <option value="CSM">CSM</option>
+                    <option value="ECE">ECE</option>
+                    <option value="EEE">EEE</option>
+                    <option value="MECH">MECH</option>
+                    <option value="CIVIL">CIVIL</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+
+            <table id="studentsTable">
+                <thead>
+                    <tr>
+                        <th>Roll No</th>
+                        <th>Branch</th>
+                        <th>Room</th>
+                        <th>Seat No</th>
+                        <th>Subject</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+        <div class="section-container" id="seating">
+            <h2><i class="fas fa-chair"></i> Generated Seating Plan</h2>
+            
+            <div class="controls-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search by roll number, branch, subject, or room...">
+                </div>
+                
+                <div class="filter-controls">
+                    <div class="select-wrapper">
+                        <select id="filterBranch" class="enhanced-select">
+                            <option value="">All Branches</option>
+                            <option value="CSE">CSE</option>
+                            <option value="AIDS">AID</option>
+                            <option value="AIML">AIML</option>
+                            <option value="INF">IT</option>
+                            <option value="CIC">CIC</option>
+                            <option value="CSO">CSO</option>
+                            <option value="CSM">CSM</option>
+                            <option value="ECE">ECE</option>
+                            <option value="EEE">EEE</option>
+                            <option value="MECH">MECH</option>
+                            <option value="CIVIL">CIVIL</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                    
+                    <div class="select-wrapper">
+                        <select id="filterSubject" class="enhanced-select">
+                            <option value="">All Subjects</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                    
+                    <div class="select-wrapper">
+                        <select id="filterRoom" class="enhanced-select">
+                            <option value="">All Rooms</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                    
+                    <div class="sort-controls">
+                        <select id="sortBy">
+                            <option value="roll_no">Roll Number</option>
+                            <option value="room">Room</option>
+                            <option value="branch">Branch</option>
+                            <option value="subject">Subject</option>
+                        </select>
+                        <button id="sortOrder" data-order="asc" title="Toggle sort order">
+                            <i class="fas fa-sort-amount-up"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination-controls">
+                <button id="prevPage" disabled>
+                    <i class="fas fa-chevron-left"></i> Previous
+                </button>
+                <span id="pageInfo">Page 1 of 1</span>
+                <button id="nextPage" disabled>
+                    Next <i class="fas fa-chevron-right"></i>
+                </button>
+                <select id="pageSize">
+                    <option value="10">10 per page</option>
+                    <option value="25">25 per page</option>
+                    <option value="50">50 per page</option>
+                </select>
+            </div>
+
+            <div class="table-container">
+                <table id="seatingTable">
+                    <thead>
+                        <tr>
+                            <th>Roll No</th>
+                            <th>Block</th>
+                            <th>Room</th>
+                            <th>Seat No</th>
+                            <th>Branch</th>
+                            <th>Subject</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add this after the main-content div and before the footer -->
+    <div id="roomPreviewModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2><i class="fas fa-chalkboard-teacher"></i> Room Layout Preview</h2>
+            <div id="roomPreviewContainer" class="room-preview-container"></div>
+        </div>
+    </div>
+
+    <footer>
+        <span class="footer-text">
+            
+        <i class="fas fa-copyright"></i> EduSeater 2025
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

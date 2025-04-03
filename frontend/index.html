@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Seating Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+
+    <!-- Navigation Bar (Top-Right) -->
+    <nav>
+        <a href="#" id="home-btn"><b>Home</b></a>
+        <a href="about.html"><b>About</b></a>
+        <a href="contactus.html" id="contact-btn"><b>Contact Us</b></a>
+    </nav>
+    
+
+    <div class="container">
+        <div class="login-box">
+            <!-- Logo and Title -->
+            <div class="logo">
+                <h1 class="logo">
+                    
+                    <i class="fa-sharp-duotone fa-solid fa-graduation-cap"></i><span class="edu">Edu</span>Seater
+                </h1>
+            </div>
+            <p class="subheading">Login to view your seating arrangement</p><br>
+
+            <!-- Role Selection -->
+            <div class="toggle-buttons">
+                <button id="student-btn" class="active">Student Login</button>
+                <button id="admin-btn">Admin Login</button>
+            </div>
+
+            <!-- Student Login Form -->
+            <form id="student-form">
+                <div class="input-group">
+                    <label for="student-rollnum"><i class="fas fa-id-card"></i> Roll Number</label>
+                    <input type="text" id="student-rollnum" placeholder="Roll Number" required>
+                </div>
+                <div class="input-group">
+                    <label for="student-dob"><i class="fas fa-calendar"></i> Date of Birth</label>
+                    <input type="date" id="student-dob" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+            <!-- Admin Login Form -->
+            <form id="admin-form" class="hidden">
+                <div class="input-group">
+                    <label for="admin-username"><i class="fas fa-user"></i> Username</label>
+                    <input type="text" id="admin-username" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <label for="admin-pass"><i class="fas fa-lock"></i> Password</label>
+                    <input type="password" id="admin-pass" placeholder="Password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- VVIT Logo at Top Left -->
+    <a href="https://www.vvitguntur.com/" target="_blank">
+        <img src="https://res.cloudinary.com/dy9xcggyt/image/upload/v1736696738/tonfmmzzjhza7xa45s2b.jpg" 
+             alt="VVIT Logo" class="logo-img">
+    </a>
+
+    <footer>&copy; EduSeat Planner</footer>
+
+</body>
+</html>
